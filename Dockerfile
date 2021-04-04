@@ -6,6 +6,8 @@ RUN apk update \
   && apk add bash \
   && apk add openssh-client \
   && apk add rsync \
+  && apk add tar  \
+  && apk add xz  \
   && apk add git \
   && rm -rf /var/cache/apk/* \
   && mkdir -p ~/.ssh \

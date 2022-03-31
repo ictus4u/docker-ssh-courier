@@ -1,4 +1,4 @@
-FROM alpine:3.12.5
+FROM alpine:3.15.3
 
 WORKDIR /workspace
 

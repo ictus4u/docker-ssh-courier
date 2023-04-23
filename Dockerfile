@@ -3,7 +3,7 @@ FROM alpine:3.17.3
 WORKDIR /workspace
 
 RUN set -e; \
-  apk apk add --no-cache \
+  apk add --no-cache \
     bash \
     coreutils \
     curl \

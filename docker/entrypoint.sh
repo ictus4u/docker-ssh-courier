@@ -15,7 +15,12 @@ parse_true() {
 
 eval "$(ssh-agent -s)" > /dev/null
 
-[ -z "${SSH_PRIVATE_KEY}"      ] || echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+: "${SSH_PRIVATE_KEY:=$(cat /run/secrets/ssh-private-key 2>/dev/null || true)}"
+: "${GIT_USER_NAME:=$(cat /run/secrets/git-user-name 2>/dev/null || true)}"
+: "${GIT_USER_EMAIL:=$(cat /run/secrets/git-user-email 2>/dev/null || true)}"
+: "${SHELL_EXPAND_ALIASES:=false}"
+
+[ -z "${SSH_PRIVATE_KEY}"      ] || tr -d '\r' <<< "${SSH_PRIVATE_KEY}"| ssh-add -
 [ -z "${GIT_USER_NAME}"        ] || git config --global user.name "${GIT_USER_NAME}"
 [ -z "${GIT_USER_EMAIL}"       ] || git config --global user.email "${GIT_USER_EMAIL}"
 ! parse_true "${SHELL_EXPAND_ALIASES}" || shopt -s expand_aliases

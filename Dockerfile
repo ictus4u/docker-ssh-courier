@@ -9,6 +9,7 @@ RUN set -e; \
     curl \
     git \
     openssh-client \
+    pv \
     rsync \
     tar \
     tini \
